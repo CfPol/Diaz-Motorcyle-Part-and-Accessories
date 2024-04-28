@@ -63,5 +63,7 @@ Public Class Form4
         CType(parentForm, accountview).DataGridView1.DataSource = dt
     End Sub
 
+    Private Sub level_cbo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles level_cbo.SelectedIndexChanged
 
+    End Sub
 End Class

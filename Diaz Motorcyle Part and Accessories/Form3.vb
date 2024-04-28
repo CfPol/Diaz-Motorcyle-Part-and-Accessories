@@ -52,6 +52,12 @@ Public Class Form3
                 End If
             ElseIf level = "Employee" Then
                 MessageBox.Show("Login Succesful as Employee", "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Dim openform As New Form1()
+                openform.Show()
+                Me.Hide()
+                If openform.IsDisposed Then
+                    Application.Exit()
+                End If
             End If
         Else
             MessageBox.Show("Invalid Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
