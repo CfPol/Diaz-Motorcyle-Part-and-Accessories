@@ -25,7 +25,9 @@ Module Module1
 
 End Module
 Public Class Form1
+
     Private Sub Form1_Load_database(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.WindowState = FormWindowState.Maximized
         Dim connection As MySqlConnection = Module1.ConnectToDB()
         If connection IsNot Nothing Then
             Dim command As New MySqlCommand("SELECT * FROM product", connection)
@@ -33,15 +35,18 @@ Public Class Form1
             Dim table As New DataTable()
             adapter.Fill(table)
             DataGridView1.DataSource = table
+
         End If
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set up columns
         ListView1.View = View.Details
-        ListView1.Columns.Add("ITEM", 100, HorizontalAlignment.Left)
-        ListView1.Columns.Add("MODEL", 100, HorizontalAlignment.Left)
-        ListView1.Columns.Add("PRICE", 100, HorizontalAlignment.Left)
+        ListView1.Columns.Add("ITEM", 75, HorizontalAlignment.Left)
+        ListView1.Columns.Add("MODEL", 75, HorizontalAlignment.Left)
+        ListView1.Columns.Add("PRICE", 75, HorizontalAlignment.Left)
+        ListView1.Columns.Add("AMOUNT", 75, HorizontalAlignment.Left)
+
     End Sub
 
     Private Sub Form1_list(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -84,41 +89,79 @@ Public Class Form1
             Dim model As String = DataGridView1.Rows(e.RowIndex).Cells("Model").Value.ToString()
             Dim unitPrice As String = DataGridView1.Rows(e.RowIndex).Cells("Unit_price").Value.ToString()
 
+            ' check if item in lits
+            Dim itemExists As Boolean = False
+            For Each item As ListViewItem In ListView1.Items
+                If item.SubItems(0).Text = name AndAlso item.SubItems(1).Text = model Then
+                    item.SubItems(3).Text = (Convert.ToInt32(item.SubItems(3).Text) + 1).ToString()
+                    itemExists = True
+                    Exit For
+                End If
+            Next
 
-            Dim newItem As New ListViewItem(name)
-            newItem.SubItems.Add(model)
-            newItem.SubItems.Add(unitPrice)
-            ListView1.Items.Add(newItem)
-
+            ' If the item doesn't exist in the ListView, add it
+            If Not itemExists Then
+                Dim newItem As New ListViewItem(name)
+                newItem.SubItems.Add(model)
+                newItem.SubItems.Add(unitPrice)
+                newItem.SubItems.Add("1") ' Start with amount 1
+                ListView1.Items.Add(newItem)
+            End If
         End If
 
         Dim sum As Integer = 0
+        Dim total As Integer = 0
 
         For Each item As ListViewItem In ListView1.Items
-            Dim value As Integer
-            If Integer.TryParse(item.SubItems(2).Text, value) Then
-                sum += value
+            Dim unitp As Integer
+            Dim amount As Integer
+
+            If Integer.TryParse(item.SubItems(2).Text, unitp) Then
+                If Integer.TryParse(item.SubItems(3).Text, amount) Then
+                    sum += unitp * amount
+                End If
             End If
         Next
 
 
-        lbl_total.Text = sum.ToString()
+        Charge_btn.Text = "Charge" + "  " + "₱ " + sum.ToString()
     End Sub
     Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
+        'check if there is item on list
         If ListView1.SelectedItems.Count > 0 Then
-            ListView1.Items.Remove(ListView1.SelectedItems(0))
-            Dim sum As Integer = 0
+            Dim selectedItem As ListViewItem = ListView1.SelectedItems(0)
+            Dim subItemValue As Integer
+            'check if item is greater than 1
+            If Integer.TryParse(selectedItem.SubItems(3).Text, subItemValue) Then
+                'if yes subtract
+                If subItemValue > 1 Then
+                    subItemValue -= 1
+                    selectedItem.SubItems(3).Text = subItemValue.ToString()
+                    'if no remove
+                ElseIf subItemValue = 1 Then
+                    selectedItem.Remove()
 
-            For Each item As ListViewItem In ListView1.Items
-                Dim value As Integer
-                If Integer.TryParse(item.SubItems(2).Text, value) Then
-                    sum += value
                 End If
-            Next
-
-
-            lbl_total.Text = sum.ToString()
+            Else
+                MessageBox.Show("Invalid Integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
+        Dim sum As Integer = 0
+
+        For Each item As ListViewItem In ListView1.Items
+            Dim unitp As Integer
+            Dim amount As Integer
+
+            If Integer.TryParse(item.SubItems(2).Text, unitp) Then
+                If Integer.TryParse(item.SubItems(3).Text, amount) Then
+                    sum += unitp * amount
+                End If
+            End If
+        Next
+
+
+        Charge_btn.Text = "Charge" + "  " + "₱ " + sum.ToString()
+
     End Sub
 
     Private Sub Supplier_Click(sender As Object, e As EventArgs) Handles Supplier.Click
@@ -146,5 +189,9 @@ Public Class Form1
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+
     End Sub
 End Class

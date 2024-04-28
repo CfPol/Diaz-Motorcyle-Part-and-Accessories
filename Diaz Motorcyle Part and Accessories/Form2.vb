@@ -76,7 +76,7 @@ Public Class Form2
             Return
         End If
         If Not IsNumeric(contact_no.Text) Then
-            MessageBox.Show("Contact number must not contain letter.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Contact number must not contain letters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
         Dim connectionString As String = "server=localhost; user id=root; password=; database=diaz"

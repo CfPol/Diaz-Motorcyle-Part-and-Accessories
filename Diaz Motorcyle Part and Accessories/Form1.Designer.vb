@@ -27,11 +27,7 @@ Partial Class Form1
         lbl_search = New Label()
         FlowLayoutPanel1 = New FlowLayoutPanel()
         ListView1 = New ListView()
-        Panel1 = New Panel()
-        lbl_total = New Label()
-        Label2 = New Label()
-        Label1 = New Label()
-        lbl_charge = New Label()
+        Charge_btn = New Button()
         Supplier = New Button()
         Products = New Button()
         Invoice = New Button()
@@ -39,7 +35,6 @@ Partial Class Form1
         Service = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         FlowLayoutPanel1.SuspendLayout()
-        Panel1.SuspendLayout()
         SuspendLayout()
         ' 
         ' DataGridView1
@@ -76,7 +71,7 @@ Partial Class Form1
         ' FlowLayoutPanel1
         ' 
         FlowLayoutPanel1.Controls.Add(ListView1)
-        FlowLayoutPanel1.Controls.Add(Panel1)
+        FlowLayoutPanel1.Controls.Add(Charge_btn)
         FlowLayoutPanel1.FlowDirection = FlowDirection.TopDown
         FlowLayoutPanel1.Location = New Point(540, 39)
         FlowLayoutPanel1.Name = "FlowLayoutPanel1"
@@ -91,59 +86,19 @@ Partial Class Form1
         ListView1.TabIndex = 2
         ListView1.UseCompatibleStateImageBehavior = False
         ' 
-        ' Panel1
+        ' Charge_btn
         ' 
-        Panel1.BackColor = Color.LimeGreen
-        Panel1.Controls.Add(lbl_total)
-        Panel1.Controls.Add(Label2)
-        Panel1.Controls.Add(Label1)
-        Panel1.Controls.Add(lbl_charge)
-        Panel1.Location = New Point(3, 316)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(292, 79)
-        Panel1.TabIndex = 3
-        ' 
-        ' lbl_total
-        ' 
-        lbl_total.Anchor = AnchorStyles.Right
-        lbl_total.AutoSize = True
-        lbl_total.Font = New Font("Montserrat", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lbl_total.ForeColor = SystemColors.ControlLightLight
-        lbl_total.Location = New Point(201, 25)
-        lbl_total.Name = "lbl_total"
-        lbl_total.Size = New Size(46, 25)
-        lbl_total.TabIndex = 3
-        lbl_total.Text = "0.0"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Montserrat", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.ForeColor = SystemColors.ControlLightLight
-        Label2.Location = New Point(131, 25)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(27, 25)
-        Label2.TabIndex = 2
-        Label2.Text = "₱"
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Location = New Point(131, 31)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(0, 15)
-        Label1.TabIndex = 1
-        ' 
-        ' lbl_charge
-        ' 
-        lbl_charge.AutoSize = True
-        lbl_charge.Font = New Font("Montserrat", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lbl_charge.ForeColor = SystemColors.ControlLightLight
-        lbl_charge.Location = New Point(3, 25)
-        lbl_charge.Name = "lbl_charge"
-        lbl_charge.Size = New Size(104, 25)
-        lbl_charge.TabIndex = 0
-        lbl_charge.Text = "CHARGE"
+        Charge_btn.BackColor = Color.LimeGreen
+        Charge_btn.Cursor = Cursors.Hand
+        Charge_btn.FlatStyle = FlatStyle.Popup
+        Charge_btn.Font = New Font("Montserrat", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Charge_btn.ForeColor = SystemColors.ControlLightLight
+        Charge_btn.Location = New Point(3, 316)
+        Charge_btn.Name = "Charge_btn"
+        Charge_btn.Size = New Size(292, 79)
+        Charge_btn.TabIndex = 3
+        Charge_btn.Text = "Charge     ₱  0.0"
+        Charge_btn.UseVisualStyleBackColor = False
         ' 
         ' Supplier
         ' 
@@ -208,8 +163,6 @@ Partial Class Form1
         Text = "Form1"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         FlowLayoutPanel1.ResumeLayout(False)
-        Panel1.ResumeLayout(False)
-        Panel1.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -219,15 +172,11 @@ Partial Class Form1
     Friend WithEvents lbl_search As Label
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents ListView1 As ListView
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents lbl_charge As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents lbl_total As Label
     Friend WithEvents Supplier As Button
     Friend WithEvents Products As Button
     Friend WithEvents Invoice As Button
     Friend WithEvents Warranty As Button
     Friend WithEvents Service As Button
+    Friend WithEvents Charge_btn As Button
 
 End Class

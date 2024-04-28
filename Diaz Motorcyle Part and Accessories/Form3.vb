@@ -18,7 +18,6 @@ Module Module3
             connection.Open()
             Return connection
         Catch ex As Exception
-            MsgBox("Database is not connected.", vbOKOnly, "Connection Error")
             Return Nothing
         End Try
     End Function
@@ -27,6 +26,13 @@ End Module
 Public Class Form3
     Private Sub login_logic(sender As Object, e As EventArgs) Handles signin_btn.Click
         Dim connection As MySqlConnection = Module3.ConnectToDB()
+
+        ' Check database
+        If connection Is Nothing Then
+            ' return error if connectiion failed
+            MessageBox.Show("Database is Offline", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
         Dim username As String = usernametxt.Text
         Dim password As String = passwordtxt.Text
 
@@ -38,7 +44,7 @@ Public Class Form3
         If Not String.IsNullOrEmpty(level) Then
             If level = "Owner" Then
                 MessageBox.Show("Login Succesful as Owner", "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Dim openform As New Form1()
+                Dim openform As New Form5()
                 openform.Show()
                 Me.Hide()
                 If openform.IsDisposed Then
