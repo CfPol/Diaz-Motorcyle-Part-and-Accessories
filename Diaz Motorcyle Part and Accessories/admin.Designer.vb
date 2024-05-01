@@ -28,7 +28,7 @@ Partial Class Form5
         Panel1 = New Panel()
         Label1 = New Label()
         Button5 = New Button()
-        Button4 = New Button()
+        account_btn = New Button()
         Button3 = New Button()
         data_btn = New Button()
         Button1 = New Button()
@@ -36,7 +36,7 @@ Partial Class Form5
         Panel3 = New Panel()
         Button8 = New Button()
         Button7 = New Button()
-        Button6 = New Button()
+        prod_btn = New Button()
         Panel1.SuspendLayout()
         Panel3.SuspendLayout()
         SuspendLayout()
@@ -59,7 +59,7 @@ Partial Class Form5
         ' 
         Panel1.Controls.Add(Label1)
         Panel1.Controls.Add(Button5)
-        Panel1.Controls.Add(Button4)
+        Panel1.Controls.Add(account_btn)
         Panel1.Controls.Add(Button3)
         Panel1.Controls.Add(data_btn)
         Panel1.Controls.Add(Button1)
@@ -90,17 +90,17 @@ Partial Class Form5
         Button5.Text = "Sign Out"
         Button5.UseVisualStyleBackColor = True
         ' 
-        ' Button4
+        ' account_btn
         ' 
-        Button4.ImageAlign = ContentAlignment.MiddleLeft
-        Button4.ImageIndex = 1
-        Button4.ImageList = ImageList1
-        Button4.Location = New Point(3, 168)
-        Button4.Name = "Button4"
-        Button4.Size = New Size(147, 23)
-        Button4.TabIndex = 4
-        Button4.Text = "Accounts"
-        Button4.UseVisualStyleBackColor = True
+        account_btn.ImageAlign = ContentAlignment.MiddleLeft
+        account_btn.ImageIndex = 1
+        account_btn.ImageList = ImageList1
+        account_btn.Location = New Point(3, 168)
+        account_btn.Name = "account_btn"
+        account_btn.Size = New Size(147, 23)
+        account_btn.TabIndex = 4
+        account_btn.Text = "Accounts"
+        account_btn.UseVisualStyleBackColor = True
         ' 
         ' Button3
         ' 
@@ -150,7 +150,7 @@ Partial Class Form5
         ' 
         Panel3.Controls.Add(Button8)
         Panel3.Controls.Add(Button7)
-        Panel3.Controls.Add(Button6)
+        Panel3.Controls.Add(prod_btn)
         Panel3.Location = New Point(158, 1)
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(1094, 75)
@@ -181,17 +181,17 @@ Partial Class Form5
         Button7.Text = "Suppliers"
         Button7.UseVisualStyleBackColor = True
         ' 
-        ' Button6
+        ' prod_btn
         ' 
-        Button6.ImageAlign = ContentAlignment.MiddleLeft
-        Button6.ImageIndex = 7
-        Button6.ImageList = ImageList1
-        Button6.Location = New Point(3, 49)
-        Button6.Name = "Button6"
-        Button6.Size = New Size(147, 23)
-        Button6.TabIndex = 7
-        Button6.Text = "Products"
-        Button6.UseVisualStyleBackColor = True
+        prod_btn.ImageAlign = ContentAlignment.MiddleLeft
+        prod_btn.ImageIndex = 7
+        prod_btn.ImageList = ImageList1
+        prod_btn.Location = New Point(3, 49)
+        prod_btn.Name = "prod_btn"
+        prod_btn.Size = New Size(147, 23)
+        prod_btn.TabIndex = 7
+        prod_btn.Text = "Products"
+        prod_btn.UseVisualStyleBackColor = True
         ' 
         ' Form5
         ' 
@@ -214,7 +214,7 @@ Partial Class Form5
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents account_btn As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
@@ -222,6 +222,6 @@ Partial Class Form5
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
-    Friend WithEvents Button6 As Button
+    Friend WithEvents prod_btn As Button
     Friend WithEvents data_btn As Button
 End Class

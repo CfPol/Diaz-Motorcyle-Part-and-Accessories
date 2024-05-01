@@ -1,7 +1,6 @@
-﻿Imports System.Data.SqlClient
-Imports MySql.Data.MySqlClient
-Public Class Products
+﻿Imports MySql.Data.MySqlClient
 
+Public Class product
     Private Sub Products_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Connection string to your SQL Server database
         Dim connectionString As MySqlConnection = Module3.ConnectToDB()

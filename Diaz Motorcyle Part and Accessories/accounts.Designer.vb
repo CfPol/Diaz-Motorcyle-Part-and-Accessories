@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class accountview
-    Inherits System.Windows.Forms.Form
+Partial Class accounts
+    Inherits System.Windows.Forms.UserControl
 
-    'Form overrides dispose to clean up the component list.
+    'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -20,12 +20,13 @@ Partial Class accountview
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         DataGridView1 = New DataGridView()
         add_btn = New Button()
         del_btn = New Button()
         add_panel = New Panel()
+        upd_acc = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -40,7 +41,7 @@ Partial Class accountview
         ' 
         ' add_btn
         ' 
-        add_btn.Location = New Point(437, 107)
+        add_btn.Location = New Point(366, 107)
         add_btn.Name = "add_btn"
         add_btn.Size = New Size(100, 40)
         add_btn.TabIndex = 1
@@ -49,7 +50,7 @@ Partial Class accountview
         ' 
         ' del_btn
         ' 
-        del_btn.Location = New Point(602, 107)
+        del_btn.Location = New Point(582, 107)
         del_btn.Name = "del_btn"
         del_btn.Size = New Size(100, 40)
         del_btn.TabIndex = 2
@@ -64,17 +65,26 @@ Partial Class accountview
         add_panel.Size = New Size(816, 489)
         add_panel.TabIndex = 3
         ' 
-        ' accountview
+        ' upd_acc
+        ' 
+        upd_acc.Location = New Point(472, 107)
+        upd_acc.Name = "upd_acc"
+        upd_acc.Size = New Size(104, 40)
+        upd_acc.TabIndex = 4
+        upd_acc.Text = "Update Account"
+        upd_acc.UseVisualStyleBackColor = True
+        ' 
+        ' accounts
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1078, 852)
-        Controls.Add(add_panel)
+        Controls.Add(upd_acc)
         Controls.Add(del_btn)
+        Controls.Add(add_panel)
         Controls.Add(add_btn)
         Controls.Add(DataGridView1)
-        Name = "accountview"
-        Text = "accountview"
+        Name = "accounts"
+        Size = New Size(1078, 852)
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
@@ -83,4 +93,6 @@ Partial Class accountview
     Friend WithEvents add_btn As Button
     Friend WithEvents del_btn As Button
     Friend WithEvents add_panel As Panel
+    Friend WithEvents upd_acc As Button
+
 End Class

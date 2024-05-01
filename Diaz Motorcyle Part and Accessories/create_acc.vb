@@ -1,15 +1,19 @@
-﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports MySql.Data.MySqlClient
-Imports Org.BouncyCastle.Asn1.X500
+﻿Imports MySql.Data.MySqlClient
 
-Public Class Form4
+Public Class create_acc
     Shadows parentForm As Form
     Private connectionString As MySqlConnection = Module3.ConnectToDB()
+    Private _parentUserControl As accounts
 
-    Public Sub New(parent As Form)
+    Public Sub New(parent As accounts)
         InitializeComponent()
-        parentForm = parent
+        _parentUserControl = parent
     End Sub
+
+
+
+
+
 
     Public Function usernameExists(username As String) As Boolean
         Dim connectionString As MySqlConnection = Module3.ConnectToDB()
@@ -47,23 +51,19 @@ Public Class Form4
                 command.Parameters.AddWithValue("@value3", level_cbo.Text)
                 command.ExecuteNonQuery()
                 MessageBox.Show("New Account Created Successfully", ":)", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                _parentUserControl.refresh_table()
             ElseIf usernameExists(name_txt.Text) Then
                 MessageBox.Show("Username Already Exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
                 MessageBox.Show("Password Does Not Match", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
             End If
-
+            _parentUserControl.refresh_table()
         End Using
 
-        Dim dt As New DataTable()
-        Using adapter As New MySqlDataAdapter("SELECT Username, Level FROM accounts", connectionString)
-            adapter.Fill(dt)
-        End Using
-        CType(parentForm, accountview).DataGridView1.DataSource = dt
-    End Sub
 
-    Private Sub level_cbo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles level_cbo.SelectedIndexChanged
 
     End Sub
+
+
 End Class

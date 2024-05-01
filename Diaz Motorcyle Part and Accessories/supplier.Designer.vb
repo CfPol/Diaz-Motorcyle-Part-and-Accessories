@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Products
-    Inherits System.Windows.Forms.Form
+Partial Class supplier
+    Inherits System.Windows.Forms.UserControl
 
-    'Form overrides dispose to clean up the component list.
+    'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -20,14 +20,12 @@ Partial Class Products
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Panel1 = New Panel()
         form2_search = New TextBox()
         Label6 = New Label()
         Panel2 = New Panel()
-        supplier_cbo = New ComboBox()
-        Label7 = New Label()
         delete = New Button()
         update_btn = New Button()
         add = New Button()
@@ -36,11 +34,11 @@ Partial Class Products
         Label3 = New Label()
         Label2 = New Label()
         Label1 = New Label()
-        stock = New TextBox()
-        prod_model = New TextBox()
-        unit_price = New TextBox()
-        prod_brand = New TextBox()
-        prod_name = New TextBox()
+        address = New TextBox()
+        contact_no = New TextBox()
+        email = New TextBox()
+        Supp_person = New TextBox()
+        Supp_name = New TextBox()
         DataGridView1 = New DataGridView()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
@@ -76,8 +74,6 @@ Partial Class Products
         ' Panel2
         ' 
         Panel2.BackColor = Color.Bisque
-        Panel2.Controls.Add(supplier_cbo)
-        Panel2.Controls.Add(Label7)
         Panel2.Controls.Add(delete)
         Panel2.Controls.Add(update_btn)
         Panel2.Controls.Add(add)
@@ -86,32 +82,15 @@ Partial Class Products
         Panel2.Controls.Add(Label3)
         Panel2.Controls.Add(Label2)
         Panel2.Controls.Add(Label1)
-        Panel2.Controls.Add(stock)
-        Panel2.Controls.Add(prod_model)
-        Panel2.Controls.Add(unit_price)
-        Panel2.Controls.Add(prod_brand)
-        Panel2.Controls.Add(prod_name)
+        Panel2.Controls.Add(address)
+        Panel2.Controls.Add(contact_no)
+        Panel2.Controls.Add(email)
+        Panel2.Controls.Add(Supp_person)
+        Panel2.Controls.Add(Supp_name)
         Panel2.Location = New Point(2, 269)
         Panel2.Name = "Panel2"
         Panel2.Size = New Size(865, 182)
         Panel2.TabIndex = 1
-        ' 
-        ' supplier_cbo
-        ' 
-        supplier_cbo.Location = New Point(458, 103)
-        supplier_cbo.Name = "supplier_cbo"
-        supplier_cbo.Size = New Size(232, 23)
-        supplier_cbo.TabIndex = 15
-        supplier_cbo.Text = "Choose Supplier"
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.Location = New Point(402, 106)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(50, 15)
-        Label7.TabIndex = 14
-        Label7.Text = "Supplier"
         ' 
         ' delete
         ' 
@@ -153,82 +132,82 @@ Partial Class Products
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(394, 22)
+        Label5.Location = New Point(416, 22)
         Label5.Name = "Label5"
-        Label5.Size = New Size(58, 15)
+        Label5.Size = New Size(36, 15)
         Label5.TabIndex = 9
-        Label5.Text = "Unit Price"
+        Label5.Text = "Email"
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
         Label4.Location = New Point(48, 22)
         Label4.Name = "Label4"
-        Label4.Size = New Size(84, 15)
+        Label4.Size = New Size(85, 15)
         Label4.TabIndex = 8
-        Label4.Text = "Product Name"
+        Label4.Text = "Supplier Name"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(91, 106)
+        Label3.Location = New Point(37, 106)
         Label3.Name = "Label3"
-        Label3.Size = New Size(41, 15)
+        Label3.Size = New Size(96, 15)
         Label3.TabIndex = 7
-        Label3.Text = "Model"
+        Label3.Text = "Contact Number"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(365, 66)
+        Label2.Location = New Point(403, 66)
         Label2.Name = "Label2"
-        Label2.Size = New Size(87, 15)
+        Label2.Size = New Size(49, 15)
         Label2.TabIndex = 6
-        Label2.Text = "Available Stock"
+        Label2.Text = "Address"
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(94, 66)
+        Label1.Location = New Point(45, 66)
         Label1.Name = "Label1"
-        Label1.Size = New Size(38, 15)
+        Label1.Size = New Size(88, 15)
         Label1.TabIndex = 5
-        Label1.Text = "Brand"
+        Label1.Text = "Contact Person"
         ' 
-        ' stock
+        ' address
         ' 
-        stock.Location = New Point(458, 63)
-        stock.Name = "stock"
-        stock.Size = New Size(232, 23)
-        stock.TabIndex = 4
+        address.Location = New Point(458, 63)
+        address.Name = "address"
+        address.Size = New Size(232, 23)
+        address.TabIndex = 4
         ' 
-        ' prod_model
+        ' contact_no
         ' 
-        prod_model.Location = New Point(139, 103)
-        prod_model.Name = "prod_model"
-        prod_model.Size = New Size(158, 23)
-        prod_model.TabIndex = 3
+        contact_no.Location = New Point(139, 103)
+        contact_no.Name = "contact_no"
+        contact_no.Size = New Size(126, 23)
+        contact_no.TabIndex = 3
         ' 
-        ' unit_price
+        ' email
         ' 
-        unit_price.Location = New Point(458, 19)
-        unit_price.Name = "unit_price"
-        unit_price.Size = New Size(232, 23)
-        unit_price.TabIndex = 2
+        email.Location = New Point(458, 19)
+        email.Name = "email"
+        email.Size = New Size(232, 23)
+        email.TabIndex = 2
         ' 
-        ' prod_brand
+        ' Supp_person
         ' 
-        prod_brand.Location = New Point(139, 63)
-        prod_brand.Name = "prod_brand"
-        prod_brand.Size = New Size(158, 23)
-        prod_brand.TabIndex = 1
+        Supp_person.Location = New Point(139, 63)
+        Supp_person.Name = "Supp_person"
+        Supp_person.Size = New Size(126, 23)
+        Supp_person.TabIndex = 1
         ' 
-        ' prod_name
+        ' Supp_name
         ' 
-        prod_name.Location = New Point(139, 19)
-        prod_name.Name = "prod_name"
-        prod_name.Size = New Size(158, 23)
-        prod_name.TabIndex = 0
+        Supp_name.Location = New Point(139, 19)
+        Supp_name.Name = "Supp_name"
+        Supp_name.Size = New Size(126, 23)
+        Supp_name.TabIndex = 0
         ' 
         ' DataGridView1
         ' 
@@ -240,16 +219,15 @@ Partial Class Products
         DataGridView1.Size = New Size(865, 205)
         DataGridView1.TabIndex = 2
         ' 
-        ' Products
+        ' supplier
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(870, 450)
         Controls.Add(DataGridView1)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
-        Name = "Products"
-        Text = "Form2"
+        Name = "supplier"
+        Size = New Size(870, 450)
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         Panel2.ResumeLayout(False)
@@ -266,17 +244,15 @@ Partial Class Products
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents stock As TextBox
-    Friend WithEvents prod_model As TextBox
-    Friend WithEvents unit_price As TextBox
-    Friend WithEvents prod_brand As TextBox
-    Friend WithEvents prod_name As TextBox
+    Friend WithEvents address As TextBox
+    Friend WithEvents contact_no As TextBox
+    Friend WithEvents email As TextBox
+    Friend WithEvents Supp_person As TextBox
+    Friend WithEvents Supp_name As TextBox
     Friend WithEvents delete As Button
     Friend WithEvents update_btn As Button
     Friend WithEvents add As Button
     Friend WithEvents form2_search As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents supplier_cbo As ComboBox
 
 End Class

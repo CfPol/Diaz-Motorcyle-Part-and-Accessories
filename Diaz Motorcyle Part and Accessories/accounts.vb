@@ -1,7 +1,36 @@
-﻿
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
+Imports Org.BouncyCastle.Tls
 
-Public Class accountview
+Public Class accounts
+
+    Private _editAccControl As edit_acc
+
+    Public Sub New()
+        InitializeComponent()
+        _editAccControl = New edit_acc()
+    End Sub
+
+    'some important shit
+
+
+    Public Sub refresh_table()
+        Dim dt As New DataTable()
+        Dim connection As MySqlConnection = Module3.ConnectToDB()
+        Using adapter As New MySqlDataAdapter("SELECT Username, Level FROM accounts", connection)
+            adapter.Fill(dt)
+            DataGridView1.DataSource = dt
+        End Using
+    End Sub
+
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+        If e.RowIndex >= 0 AndAlso e.RowIndex < DataGridView1.Rows.Count Then
+            Dim username As String = DataGridView1.Rows(e.RowIndex).Cells("Username").Value.ToString()
+            Dim level As String = DataGridView1.Rows(e.RowIndex).Cells("Level").Value.ToString()
+            _editAccControl.UpdateTextBox(username, level)
+        End If
+    End Sub
+
     Private Sub load_account(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim connection As MySqlConnection = Module3.ConnectToDB()
         Dim query As String = "SELECT Username, Level FROM accounts"
@@ -15,20 +44,15 @@ Public Class accountview
         End Using
     End Sub
 
+
+
+
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
         If DataGridView1.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
         End If
     End Sub
 
-    Private Shadows Sub add_click(sender As Object, e As EventArgs) Handles add_btn.Click
-        Dim form As New Form4(Me)
-        form.TopLevel = False
-        form.FormBorderStyle = FormBorderStyle.None
-        form.Dock = DockStyle.Fill
-        add_panel.Controls.Add(form)
-        form.Show()
-    End Sub
 
     Private Shadows Sub delete_Click(sender As Object, e As EventArgs) Handles del_btn.Click
 
@@ -59,5 +83,44 @@ Public Class accountview
                 DataGridView1.DataSource = dt
             End If
         End If
+    End Sub
+
+    Private Sub add_panel_Paint(sender As Object, e As PaintEventArgs) Handles add_panel.Paint
+        Dim open As New create_acc(Me)
+        open.Dock = DockStyle.Fill
+        add_panel.Controls.Add(open)
+        open.BringToFront()
+
+    End Sub
+
+    Private Sub close_add()
+        Dim close As New create_acc(Me)
+        add_panel.Controls.Remove(close)
+    End Sub
+
+
+    Private Sub close_upd()
+        Dim close As New edit_acc()
+        add_panel.Controls.Remove(close)
+    End Sub
+
+    Private Sub upd_acc_Click(sender As Object, e As EventArgs) Handles upd_acc.Click
+        close_add()
+
+        Dim open As New edit_acc()
+        open.Dock = DockStyle.Fill
+        add_panel.Controls.Add(open)
+        open.BringToFront()
+
+    End Sub
+
+    Private Sub add_btn_Click(sender As Object, e As EventArgs) Handles add_btn.Click
+        close_upd()
+
+        Dim open As New create_acc(Me)
+        open.Dock = DockStyle.Fill
+        add_panel.Controls.Add(open)
+        open.BringToFront()
+
     End Sub
 End Class

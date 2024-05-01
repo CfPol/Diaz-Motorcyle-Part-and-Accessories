@@ -1,8 +1,8 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form4
-    Inherits System.Windows.Forms.Form
+Partial Class edit_acc
+    Inherits System.Windows.Forms.UserControl
 
-    'Form overrides dispose to clean up the component list.
+    'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
@@ -20,7 +20,7 @@ Partial Class Form4
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Label1 = New Label()
         Panel1 = New Panel()
@@ -42,9 +42,9 @@ Partial Class Form4
         Label1.Font = New Font("Georgia", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(114, 36)
         Label1.Name = "Label1"
-        Label1.Size = New Size(175, 29)
+        Label1.Size = New Size(151, 29)
         Label1.TabIndex = 0
-        Label1.Text = "Create Account"
+        Label1.Text = "Edit Account"
         ' 
         ' Panel1
         ' 
@@ -92,7 +92,7 @@ Partial Class Form4
         create_btn.Name = "create_btn"
         create_btn.Size = New Size(116, 23)
         create_btn.TabIndex = 9
-        create_btn.Text = "Create Account"
+        create_btn.Text = "Edit Account"
         create_btn.UseVisualStyleBackColor = False
         ' 
         ' pass2_txt
@@ -120,11 +120,11 @@ Partial Class Form4
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Georgia", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(67, 81)
+        Label5.Location = New Point(31, 81)
         Label5.Name = "Label5"
-        Label5.Size = New Size(76, 18)
+        Label5.Size = New Size(112, 18)
         Label5.TabIndex = 5
-        Label5.Text = "Password"
+        Label5.Text = "New Password"
         ' 
         ' Label4
         ' 
@@ -146,15 +146,14 @@ Partial Class Form4
         Label2.TabIndex = 2
         Label2.Text = "Username"
         ' 
-        ' Form4
+        ' edit_acc
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
         Controls.Add(Panel1)
         Controls.Add(Label1)
-        Name = "Form4"
-        Text = "Form4"
+        Name = "edit_acc"
+        Size = New Size(800, 450)
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         ResumeLayout(False)
@@ -172,4 +171,5 @@ Partial Class Form4
     Friend WithEvents name_txt As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents level_cbo As ComboBox
+
 End Class

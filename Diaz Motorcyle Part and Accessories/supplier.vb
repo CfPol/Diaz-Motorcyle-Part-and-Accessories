@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+﻿
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports MySql.Data.MySqlClient
 Imports Org.BouncyCastle.Asn1.X500
 Module Module2
@@ -23,8 +24,7 @@ Module Module2
         End Try
     End Function
 End Module
-
-Public Class Form2
+Public Class supplier
     Private Sub Form2_grid(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim connectionString As String = "server=localhost; user id=root; password=; database=diaz"
         Dim query As String = "SELECT * FROM supplier"

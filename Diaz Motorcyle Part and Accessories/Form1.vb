@@ -164,14 +164,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Supplier_Click(sender As Object, e As EventArgs) Handles Supplier.Click
-        Dim form2 As New Form2()
-        form2.ShowDialog()
 
-
-
-
-    End Sub
 
     Private Sub searchbox_TextChanged(sender As Object, e As EventArgs) Handles searchbox.TextChanged
         Dim connectionString As String = "server=localhost; user id=root; password=; database=diaz"
