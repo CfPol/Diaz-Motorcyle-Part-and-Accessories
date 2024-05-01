@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2024 at 05:00 AM
+-- Generation Time: May 01, 2024 at 10:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,12 +38,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`Username`, `Password`, `Level`) VALUES
-('1', '1', 'Owner'),
-('12', '12', 'Owner'),
-('jelo', 'jelo123', 'Owner'),
-('jelo1', 'adf', 'Employee'),
-('JustKyo', 'andrei612', 'Owner'),
-('kyo', '123', 'Owner');
+('1', '356a192b7913b04c54574d18c28d46e6395428ab', 'Owner'),
+('me', '17ba0791499db908433b80f37c5fbc89b870084b', 'Owner');
 
 -- --------------------------------------------------------
 
