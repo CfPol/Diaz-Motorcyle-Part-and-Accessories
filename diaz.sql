@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 07:54 AM
+-- Generation Time: May 01, 2024 at 05:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `diaz`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts`
+--
+
+CREATE TABLE `accounts` (
+  `Username` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Level` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`Username`, `Password`, `Level`) VALUES
+('1', '1', 'Owner'),
+('12', '12', 'Owner'),
+('jelo', 'jelo123', 'Owner'),
+('jelo1', 'adf', 'Employee'),
+('JustKyo', 'andrei612', 'Owner'),
+('kyo', '123', 'Owner');
 
 -- --------------------------------------------------------
 
@@ -53,6 +77,14 @@ CREATE TABLE `product` (
   `Available_stock` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Product_id`, `Supplier`, `Product_name`, `Brand`, `Model`, `Unit_price`, `Available_stock`) VALUES
+(1, 1, 'battery', 'motolite', 'a78', 5000, 12),
+(2, 1, 'Spark Plug', 'random', '15a1', 600, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -75,12 +107,20 @@ CREATE TABLE `repair_service` (
 
 CREATE TABLE `supplier` (
   `Supplier_id` int(11) NOT NULL,
-  `Supplier_name` varchar(50) NOT NULL,
-  `Contact_person` varchar(50) NOT NULL,
-  `Contact_number` varchar(9) NOT NULL,
-  `Email` varchar(50) DEFAULT NULL,
-  `Address` varchar(50) NOT NULL
+  `Supplier_name` varchar(255) NOT NULL,
+  `Contact_person` varchar(255) NOT NULL,
+  `Contact_number` varchar(11) NOT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`Supplier_id`, `Supplier_name`, `Contact_person`, `Contact_number`, `Email`, `Address`) VALUES
+(1, 'RusstheGruss shop', 'John Russ', '09999999999', 'sampleemail@gmail.com', 'australia'),
+(9, 'Bert Yu construction', 'jelo', '09397767933', 'foxburger1@gmial.com', 'somewhere near cathedral');
 
 -- --------------------------------------------------------
 
@@ -98,6 +138,12 @@ CREATE TABLE `warranty` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD UNIQUE KEY `Username` (`Username`);
 
 --
 -- Indexes for table `invoice`
@@ -148,7 +194,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `repair_service`
@@ -160,7 +206,7 @@ ALTER TABLE `repair_service`
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `Supplier_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `warranty`
