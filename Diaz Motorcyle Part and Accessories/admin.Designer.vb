@@ -201,6 +201,7 @@ Partial Class Form5
         Controls.Add(Panel3)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
+        FormBorderStyle = FormBorderStyle.None
         Name = "Form5"
         Text = "Form5"
         WindowState = FormWindowState.Maximized

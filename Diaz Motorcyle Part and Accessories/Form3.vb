@@ -1,6 +1,9 @@
-﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+﻿Imports System.Text
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports MySql.Data.MySqlClient
 Imports Org.BouncyCastle.Asn1.X500
+Imports System.Security.Cryptography
+
 Module Module3
     Public cn As New MySqlConnection
     Public cm As New MySqlCommand
@@ -23,7 +26,18 @@ Module Module3
     End Function
 
 End Module
+
+
 Public Class Form3
+
+    Private Function ComputeSHA1Hash(input As String) As String
+        Using sha1 As SHA1 = sha1.Create()
+            Dim data As Byte() = Encoding.UTF8.GetBytes(input)
+            Dim hash As Byte() = sha1.ComputeHash(data)
+            Return BitConverter.ToString(hash).Replace("-", "").ToLower()
+        End Using
+    End Function
+
     Private Sub login_logic(sender As Object, e As EventArgs) Handles signin_btn.Click
         Dim connection As MySqlConnection = Module3.ConnectToDB()
 
@@ -34,13 +48,16 @@ Public Class Form3
             Exit Sub
         End If
         Dim username As String = usernametxt.Text
-        Dim password As String = passwordtxt.Text
+        Dim hashedEnteredPassword As String = ComputeSHA1Hash(passwordtxt.Text)
+
 
         Dim query As String = "SELECT Level FROM accounts WHERE Username = @Username AND Password = @Password"
         Module3.cm = New MySqlCommand(query, connection)
         Module3.cm.Parameters.AddWithValue("@Username", username)
-        Module3.cm.Parameters.AddWithValue("@Password", password)
+        Module3.cm.Parameters.AddWithValue("@Password", hashedEnteredPassword)
         Dim level As String = Convert.ToString(Module3.cm.ExecuteScalar())
+
+
         If Not String.IsNullOrEmpty(level) Then
             If level = "Owner" Then
                 MessageBox.Show("Login Succesful as Owner", "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)

@@ -1,6 +1,8 @@
 ﻿Public Class Form5
     Private Sub Form5_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.TopMost = True
     End Sub
 
     Private Sub open_prod()

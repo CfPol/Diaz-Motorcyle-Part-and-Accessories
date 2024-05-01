@@ -1,4 +1,7 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Text
+Imports MySql.Data.MySqlClient
+Imports System.Security.Cryptography
+
 
 Public Class create_acc
     Shadows parentForm As Form
@@ -29,6 +32,13 @@ Public Class create_acc
 
         Return isUsernameInDatabase
     End Function
+    Private Function ComputeSHA1Hash(input As String) As String
+        Using sha1 As SHA1 = SHA1.Create()
+            Dim data As Byte() = Encoding.UTF8.GetBytes(input)
+            Dim hash As Byte() = sha1.ComputeHash(data)
+            Return BitConverter.ToString(hash).Replace("-", "").ToLower()
+        End Using
+    End Function
 
     Private Sub create_btn_Click(sender As Object, e As EventArgs) Handles create_btn.Click
         If String.IsNullOrWhiteSpace(name_txt.Text) OrElse
@@ -42,12 +52,12 @@ Public Class create_acc
         Dim connection As MySqlConnection = Module3.ConnectToDB()
         Dim query As String = "INSERT INTO accounts(Username, Password, Level) VALUES (@value1, @value2,@value3)"
 
-
+        Dim hashedPassword As String = ComputeSHA1Hash(pass_txt.Text)
 
         Using command As New MySqlCommand(query, connection)
             If pass_txt.Text = pass2_txt.Text AndAlso Not usernameExists(name_txt.Text) Then
                 command.Parameters.AddWithValue("@value1", name_txt.Text)
-                command.Parameters.AddWithValue("@value2", pass_txt.Text)
+                command.Parameters.AddWithValue("@value2", hashedPassword)
                 command.Parameters.AddWithValue("@value3", level_cbo.Text)
                 command.ExecuteNonQuery()
                 MessageBox.Show("New Account Created Successfully", ":)", MessageBoxButtons.OK, MessageBoxIcon.Information)

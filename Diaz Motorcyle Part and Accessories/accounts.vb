@@ -7,7 +7,10 @@ Public Class accounts
 
     Public Sub New()
         InitializeComponent()
-        _editAccControl = New edit_acc()
+        _editAccControl = New edit_acc(Me)
+        _editAccControl.Dock = DockStyle.Fill
+        add_panel.Controls.Add(_editAccControl)
+        _editAccControl.BringToFront()
     End Sub
 
     'some important shit
@@ -23,10 +26,13 @@ Public Class accounts
     End Sub
 
 
-    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        If e.RowIndex >= 0 AndAlso e.RowIndex < DataGridView1.Rows.Count Then
-            Dim username As String = DataGridView1.Rows(e.RowIndex).Cells("Username").Value.ToString()
-            Dim level As String = DataGridView1.Rows(e.RowIndex).Cells("Level").Value.ToString()
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick
+        If DataGridView1.SelectedRows.Count > 0 Then
+
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            Dim username = selectedRow.Cells("Username").Value.ToString
+            Dim level = selectedRow.Cells("Username").Value.ToString
+
             _editAccControl.UpdateTextBox(username, level)
         End If
     End Sub
@@ -39,6 +45,7 @@ Public Class accounts
             Using reader As MySqlDataReader = command.ExecuteReader()
                 Dim dt As New DataTable()
                 dt.Load(reader)
+
                 DataGridView1.DataSource = dt
             End Using
         End Using
@@ -85,13 +92,7 @@ Public Class accounts
         End If
     End Sub
 
-    Private Sub add_panel_Paint(sender As Object, e As PaintEventArgs) Handles add_panel.Paint
-        Dim open As New create_acc(Me)
-        open.Dock = DockStyle.Fill
-        add_panel.Controls.Add(open)
-        open.BringToFront()
 
-    End Sub
 
     Private Sub close_add()
         Dim close As New create_acc(Me)
@@ -100,17 +101,17 @@ Public Class accounts
 
 
     Private Sub close_upd()
-        Dim close As New edit_acc()
+        Dim close As New edit_acc(Me)
         add_panel.Controls.Remove(close)
     End Sub
 
     Private Sub upd_acc_Click(sender As Object, e As EventArgs) Handles upd_acc.Click
         close_add()
 
-        Dim open As New edit_acc()
-        open.Dock = DockStyle.Fill
-        add_panel.Controls.Add(open)
-        open.BringToFront()
+        _editAccControl = New edit_acc(Me)
+        _editAccControl.Dock = DockStyle.Fill
+        add_panel.Controls.Add(_editAccControl)
+        _editAccControl.BringToFront()
 
     End Sub
 
