@@ -26,7 +26,6 @@ Partial Class Form3
         main = New Panel()
         Label2 = New Label()
         Label1 = New Label()
-        LinkLabel1 = New LinkLabel()
         signin_btn = New Button()
         passwordtxt = New TextBox()
         usernametxt = New TextBox()
@@ -48,12 +47,11 @@ Partial Class Form3
         main.BackColor = Color.Transparent
         main.Controls.Add(Label2)
         main.Controls.Add(Label1)
-        main.Controls.Add(LinkLabel1)
         main.Controls.Add(signin_btn)
         main.Controls.Add(passwordtxt)
         main.Controls.Add(usernametxt)
         main.Controls.Add(signIN_lbl)
-        main.Font = New Font("Sitka Text", 9.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        main.Font = New Font("Sitka Text", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         main.Location = New Point(409, 0)
         main.Name = "main"
         main.Size = New Size(393, 451)
@@ -76,16 +74,6 @@ Partial Class Form3
         Label1.Size = New Size(64, 18)
         Label1.TabIndex = 5
         Label1.Text = "Username"
-        ' 
-        ' LinkLabel1
-        ' 
-        LinkLabel1.AutoSize = True
-        LinkLabel1.Location = New Point(36, 255)
-        LinkLabel1.Name = "LinkLabel1"
-        LinkLabel1.Size = New Size(109, 18)
-        LinkLabel1.TabIndex = 4
-        LinkLabel1.TabStop = True
-        LinkLabel1.Text = "Forgot Password?"
         ' 
         ' signin_btn
         ' 
@@ -130,7 +118,7 @@ Partial Class Form3
         ' 
         ' Form3
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(main)
@@ -148,7 +136,6 @@ Partial Class Form3
     Friend WithEvents main As Panel
     Friend WithEvents signIN_lbl As Label
     Friend WithEvents usernametxt As TextBox
-    Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents signin_btn As Button
     Friend WithEvents passwordtxt As TextBox
     Friend WithEvents Label2 As Label
