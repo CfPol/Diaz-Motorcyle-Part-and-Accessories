@@ -140,37 +140,8 @@ Public Class supplier
 
     End Sub
 
-    Private Shadows Sub delete_Click(sender As Object, e As EventArgs) Handles delete.Click
 
-        If DataGridView1.SelectedRows.Count > 0 Then
-            Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this row?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
 
-            If result = DialogResult.Yes Then
-                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                Dim uniqueId As String = selectedRow.Cells("Supplier_id").Value.ToString()
-
-                Dim connectionString As String = "server=localhost; user id=root; password=; database=diaz"
-                Dim query As String = "DELETE FROM Supplier WHERE Supplier_id = @UniqueId"
-
-                Using connection As New MySqlConnection(connectionString)
-                    Using command As New MySqlCommand(query, connection)
-                        connection.Open()
-
-                        command.Parameters.AddWithValue("@UniqueId", uniqueId)
-                        command.ExecuteNonQuery()
-                    End Using
-                End Using
-
-                ' Refresh the DataGridView to reflect the changes
-                Dim dt As New DataTable()
-                Using adapter As New MySqlDataAdapter("SELECT * FROM supplier", connectionString)
-                    adapter.Fill(dt)
-                End Using
-                DataGridView1.DataSource = dt
-            End If
-        End If
-        ClearTextBoxes()
-    End Sub
 
     Private Sub searchbox_TextChanged(sender As Object, e As EventArgs) Handles form2_search.TextChanged
         Dim connectionString As String = "server=localhost; user id=root; password=; database=diaz"

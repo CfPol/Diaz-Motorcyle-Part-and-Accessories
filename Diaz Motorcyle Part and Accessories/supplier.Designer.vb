@@ -26,7 +26,6 @@ Partial Class supplier
         form2_search = New TextBox()
         Label6 = New Label()
         Panel2 = New Panel()
-        delete = New Button()
         update_btn = New Button()
         add = New Button()
         Label5 = New Label()
@@ -74,7 +73,6 @@ Partial Class supplier
         ' Panel2
         ' 
         Panel2.BackColor = Color.Bisque
-        Panel2.Controls.Add(delete)
         Panel2.Controls.Add(update_btn)
         Panel2.Controls.Add(add)
         Panel2.Controls.Add(Label5)
@@ -92,25 +90,12 @@ Partial Class supplier
         Panel2.Size = New Size(865, 182)
         Panel2.TabIndex = 1
         ' 
-        ' delete
-        ' 
-        delete.BackColor = Color.Red
-        delete.Cursor = Cursors.Hand
-        delete.FlatStyle = FlatStyle.Popup
-        delete.ForeColor = SystemColors.ControlLightLight
-        delete.Location = New Point(615, 146)
-        delete.Name = "delete"
-        delete.Size = New Size(75, 23)
-        delete.TabIndex = 12
-        delete.Text = "DELETE"
-        delete.UseVisualStyleBackColor = False
-        ' 
         ' update_btn
         ' 
         update_btn.BackColor = Color.Blue
         update_btn.FlatStyle = FlatStyle.Popup
         update_btn.ForeColor = SystemColors.ControlLightLight
-        update_btn.Location = New Point(377, 146)
+        update_btn.Location = New Point(348, 146)
         update_btn.Name = "update_btn"
         update_btn.Size = New Size(75, 23)
         update_btn.TabIndex = 11

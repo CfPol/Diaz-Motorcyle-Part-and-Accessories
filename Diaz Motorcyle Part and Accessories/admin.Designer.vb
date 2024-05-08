@@ -27,9 +27,8 @@ Partial Class Form5
         ImageList1 = New ImageList(components)
         Panel1 = New Panel()
         Label1 = New Label()
-        Button5 = New Button()
+        signOut_btn = New Button()
         account_btn = New Button()
-        Button3 = New Button()
         data_btn = New Button()
         Button1 = New Button()
         Panel2 = New Panel()
@@ -37,6 +36,8 @@ Partial Class Form5
         Button8 = New Button()
         Button7 = New Button()
         prod_btn = New Button()
+        exit_btn = New Label()
+        backup_btn = New Button()
         Panel1.SuspendLayout()
         Panel3.SuspendLayout()
         SuspendLayout()
@@ -54,13 +55,13 @@ Partial Class Form5
         ImageList1.Images.SetKeyName(5, "icons8-invoice-50.png")
         ImageList1.Images.SetKeyName(6, "icons8-supplier-50.png")
         ImageList1.Images.SetKeyName(7, "icons8-product-24.png")
+        ImageList1.Images.SetKeyName(8, "icons8-backup-50.png")
         ' 
         ' Panel1
         ' 
         Panel1.Controls.Add(Label1)
-        Panel1.Controls.Add(Button5)
+        Panel1.Controls.Add(signOut_btn)
         Panel1.Controls.Add(account_btn)
-        Panel1.Controls.Add(Button3)
         Panel1.Controls.Add(data_btn)
         Panel1.Controls.Add(Button1)
         Panel1.Location = New Point(2, 1)
@@ -78,41 +79,29 @@ Partial Class Form5
         Label1.TabIndex = 6
         Label1.Text = "Admin"
         ' 
-        ' Button5
+        ' signOut_btn
         ' 
-        Button5.ImageAlign = ContentAlignment.MiddleLeft
-        Button5.ImageIndex = 2
-        Button5.ImageList = ImageList1
-        Button5.Location = New Point(3, 946)
-        Button5.Name = "Button5"
-        Button5.Size = New Size(147, 23)
-        Button5.TabIndex = 5
-        Button5.Text = "Sign Out"
-        Button5.UseVisualStyleBackColor = True
+        signOut_btn.ImageAlign = ContentAlignment.MiddleLeft
+        signOut_btn.ImageIndex = 2
+        signOut_btn.ImageList = ImageList1
+        signOut_btn.Location = New Point(3, 415)
+        signOut_btn.Name = "signOut_btn"
+        signOut_btn.Size = New Size(147, 23)
+        signOut_btn.TabIndex = 5
+        signOut_btn.Text = "Sign Out"
+        signOut_btn.UseVisualStyleBackColor = True
         ' 
         ' account_btn
         ' 
         account_btn.ImageAlign = ContentAlignment.MiddleLeft
         account_btn.ImageIndex = 1
         account_btn.ImageList = ImageList1
-        account_btn.Location = New Point(3, 168)
+        account_btn.Location = New Point(3, 139)
         account_btn.Name = "account_btn"
         account_btn.Size = New Size(147, 23)
         account_btn.TabIndex = 4
         account_btn.Text = "Accounts"
         account_btn.UseVisualStyleBackColor = True
-        ' 
-        ' Button3
-        ' 
-        Button3.ImageAlign = ContentAlignment.MiddleLeft
-        Button3.ImageIndex = 0
-        Button3.ImageList = ImageList1
-        Button3.Location = New Point(3, 139)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(147, 23)
-        Button3.TabIndex = 3
-        Button3.Text = "Analytics"
-        Button3.UseVisualStyleBackColor = True
         ' 
         ' data_btn
         ' 
@@ -148,12 +137,13 @@ Partial Class Form5
         ' 
         ' Panel3
         ' 
+        Panel3.Controls.Add(backup_btn)
         Panel3.Controls.Add(Button8)
         Panel3.Controls.Add(Button7)
         Panel3.Controls.Add(prod_btn)
         Panel3.Location = New Point(158, 1)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1094, 75)
+        Panel3.Size = New Size(1011, 75)
         Panel3.TabIndex = 2
         Panel3.Visible = False
         ' 
@@ -193,11 +183,36 @@ Partial Class Form5
         prod_btn.Text = "Products"
         prod_btn.UseVisualStyleBackColor = True
         ' 
+        ' exit_btn
+        ' 
+        exit_btn.AutoSize = True
+        exit_btn.BackColor = SystemColors.Control
+        exit_btn.Cursor = Cursors.Hand
+        exit_btn.Font = New Font("Courier New", 21.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        exit_btn.Location = New Point(1202, 24)
+        exit_btn.Name = "exit_btn"
+        exit_btn.Size = New Size(32, 33)
+        exit_btn.TabIndex = 3
+        exit_btn.Text = "X"
+        ' 
+        ' backup_btn
+        ' 
+        backup_btn.ImageAlign = ContentAlignment.MiddleLeft
+        backup_btn.ImageIndex = 8
+        backup_btn.ImageList = ImageList1
+        backup_btn.Location = New Point(624, 49)
+        backup_btn.Name = "backup_btn"
+        backup_btn.Size = New Size(147, 23)
+        backup_btn.TabIndex = 10
+        backup_btn.Text = "backup"
+        backup_btn.UseVisualStyleBackColor = True
+        ' 
         ' Form5
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1264, 985)
+        ClientSize = New Size(1280, 1024)
+        Controls.Add(exit_btn)
         Controls.Add(Panel3)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
@@ -209,15 +224,15 @@ Partial Class Form5
         Panel1.PerformLayout()
         Panel3.ResumeLayout(False)
         ResumeLayout(False)
+        PerformLayout()
     End Sub
 
     Friend WithEvents ImageList1 As ImageList
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button5 As Button
+    Friend WithEvents signOut_btn As Button
     Friend WithEvents account_btn As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents backup_btn As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
@@ -225,4 +240,5 @@ Partial Class Form5
     Friend WithEvents Button7 As Button
     Friend WithEvents prod_btn As Button
     Friend WithEvents data_btn As Button
+    Friend WithEvents exit_btn As Label
 End Class

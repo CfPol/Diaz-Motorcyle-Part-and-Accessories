@@ -80,8 +80,8 @@ Public Class Form3
             MessageBox.Show("Invalid Username or Password", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End If
-
-
+        usernametxt.Clear()
+        passwordtxt.Clear()
     End Sub
 
     Private Sub usernametxt_TextChanged(sender As Object, e As EventArgs) Handles usernametxt.TextChanged

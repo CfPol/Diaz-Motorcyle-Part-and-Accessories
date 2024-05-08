@@ -25,6 +25,23 @@ Module Module1
 
 End Module
 Public Class Form1
+    Public Sub refresh_table()
+        Dim connectionString As MySqlConnection = Module3.ConnectToDB()
+        Dim dt As New DataTable()
+        Using adapter As New MySqlDataAdapter("SELECT * FROM product", connectionString)
+            adapter.Fill(dt)
+        End Using
+        DataGridView1.DataSource = dt
+    End Sub
+
+
+    Private Sub Form5_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.WindowState = FormWindowState.Maximized
+        Me.FormBorderStyle = FormBorderStyle.None
+
+
+
+    End Sub
 
     Private Sub Form1_Load_database(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
@@ -38,6 +55,19 @@ Public Class Form1
 
         End If
     End Sub
+    Private Sub DataGridView1_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles DataGridView1.CellFormatting
+        If e.ColumnIndex = DataGridView1.Columns("Available_stock").Index AndAlso e.RowIndex >= 0 Then
+            Dim cellValue As Integer = Convert.ToInt32(DataGridView1.Rows(e.RowIndex).Cells("Available_stock").Value)
+            If cellValue = 0 Then
+                DataGridView1.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.Red
+                DataGridView1.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.White
+            Else
+                ' Set the default back color to white for rows with stock > 0
+                DataGridView1.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.White
+                DataGridView1.Rows(e.RowIndex).DefaultCellStyle.ForeColor = Color.Black
+            End If
+        End If
+    End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Set up columns
@@ -46,6 +76,7 @@ Public Class Form1
         ListView1.Columns.Add("MODEL", 75, HorizontalAlignment.Left)
         ListView1.Columns.Add("PRICE", 75, HorizontalAlignment.Left)
         ListView1.Columns.Add("AMOUNT", 75, HorizontalAlignment.Left)
+        ListView1.Columns.Add("ID", 75, HorizontalAlignment.Left)
 
     End Sub
 
@@ -78,16 +109,19 @@ Public Class Form1
         Dim itemFont = ListView1.Font
         Dim itemBrush = Brushes.Black
 
-        ' Draw the item text
+        ' Draw the item text idk how this works tbh
         e.Graphics.DrawString(itemText, itemFont, itemBrush, e.Bounds)
     End Sub
 
     Private sum As Integer = 0
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
         If e.RowIndex >= 0 Then
+
             Dim name As String = DataGridView1.Rows(e.RowIndex).Cells("Product_name").Value.ToString()
             Dim model As String = DataGridView1.Rows(e.RowIndex).Cells("Model").Value.ToString()
             Dim unitPrice As String = DataGridView1.Rows(e.RowIndex).Cells("Unit_price").Value.ToString()
+            Dim id As String = DataGridView1.Rows(e.RowIndex).Cells("Product_id").Value.ToString()
+            Dim stock As Integer = Convert.ToInt32(DataGridView1.Rows(e.RowIndex).Cells("Available_stock").Value)
 
             ' check if item in lits
             Dim itemExists As Boolean = False
@@ -101,22 +135,29 @@ Public Class Form1
 
             ' If the item doesn't exist in the ListView, add it
             If Not itemExists Then
-                Dim newItem As New ListViewItem(name)
-                newItem.SubItems.Add(model)
-                newItem.SubItems.Add(unitPrice)
-                newItem.SubItems.Add("1") ' Start with amount 1
-                ListView1.Items.Add(newItem)
+                If stock > 0 Then
+                    Dim newItem As New ListViewItem(name)
+                    newItem.SubItems.Add(model)
+                    newItem.SubItems.Add(unitPrice)
+                    newItem.SubItems.Add("1") ' Start with amount 1
+                    newItem.SubItems.Add(id)
+                    ListView1.Items.Add(newItem)
+                Else
+                    MessageBox.Show("This item is out of stock.", "Out of Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
             End If
         End If
 
-        Dim sum As Integer = 0
+
+
+        Dim sum As Double = 0
         Dim total As Integer = 0
 
         For Each item As ListViewItem In ListView1.Items
-            Dim unitp As Integer
+            Dim unitp As Double
             Dim amount As Integer
 
-            If Integer.TryParse(item.SubItems(2).Text, unitp) Then
+            If Double.TryParse(item.SubItems(2).Text, unitp) Then
                 If Integer.TryParse(item.SubItems(3).Text, amount) Then
                     sum += unitp * amount
                 End If
@@ -124,7 +165,9 @@ Public Class Form1
         Next
 
 
-        Charge_btn.Text = "Charge" + "  " + "₱ " + sum.ToString()
+
+
+        Charge_btn.Text = "Charge" & "  " & "₱ " & sum.ToString("0.00")
     End Sub
     Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
         'check if there is item on list
@@ -146,13 +189,13 @@ Public Class Form1
                 MessageBox.Show("Invalid Integer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         End If
-        Dim sum As Integer = 0
+        Dim sum As Double = 0
 
         For Each item As ListViewItem In ListView1.Items
-            Dim unitp As Integer
+            Dim unitp As Double
             Dim amount As Integer
 
-            If Integer.TryParse(item.SubItems(2).Text, unitp) Then
+            If Double.TryParse(item.SubItems(2).Text, unitp) Then
                 If Integer.TryParse(item.SubItems(3).Text, amount) Then
                     sum += unitp * amount
                 End If
@@ -187,4 +230,58 @@ Public Class Form1
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
+
+    Private Sub exit_btn_Click(sender As Object, e As EventArgs) Handles exit_btn.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to Exit Application?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
+
+    Private Sub signOut_btn_Click(sender As Object, e As EventArgs) Handles signOut_btn.Click
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to Sign Out?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then
+            Form3.Show()
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub Charge_btn_Click(sender As Object, e As EventArgs) Handles Charge_btn.Click
+        Dim open As New dialogOnly()
+
+
+        For Each item As ListViewItem In ListView1.Items
+            Dim newItem As New ListViewItem(item.SubItems(0).Text)
+            newItem.SubItems.Add(item.SubItems(1).Text)
+            newItem.SubItems.Add(item.SubItems(2).Text)
+            newItem.SubItems.Add(item.SubItems(3).Text)
+            newItem.SubItems.Add(item.SubItems(4).Text)
+
+            open.dialog_list.Items.Add(newItem)
+        Next
+
+
+
+        Dim sum As Double = 0
+        For Each item As ListViewItem In open.dialog_list.Items
+            Dim unitp As Double
+            Dim amount As Integer
+
+            If Double.TryParse(item.SubItems(2).Text, unitp) Then
+                If Integer.TryParse(item.SubItems(3).Text, amount) Then
+                    sum += unitp * amount
+                End If
+            End If
+
+        Next
+
+        ' Display the total sum
+        open.total_lbl.Text = sum.ToString("0.00")
+        open.ShowDialog()
+
+
+        Dim connection As MySqlConnection = Module3.ConnectToDB()
+    End Sub
+
+
 End Class
