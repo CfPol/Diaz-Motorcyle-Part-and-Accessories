@@ -1,0 +1,12 @@
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\bin\Debug\exam1.exe.config
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.vbprojResolveAssemblyReference.cache
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.Form1.resources
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.Resources.resources
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.vbproj.GenerateResource.Cache
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\bin\Debug\exam1.exe
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\bin\Debug\exam1.pdb
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\bin\Debug\exam1.xml
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\bin\Debug\MySql.Data.DLL
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.exe
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.xml
+C:\Users\ICS\Documents\BSIT2ADBMS\exam1\exam1\obj\Debug\exam1.pdb
