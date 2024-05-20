@@ -1,0 +1,116 @@
+Imports MySql.Data.MySqlClient
+
+Module Module1
+    Public cn As New MySqlConnection
+    Public cm As New MySqlCommand
+    Public dr As MySqlDataReader
+
+    Public Function ConnectToDB() As MySqlConnection
+        Dim connection As New MySqlConnection
+        Try
+            connection.ConnectionString = "server=localhost; user id=root; password=; database=exam"
+            connection.Open()
+            Return connection
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+End Module
+
+Public Class Form1
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Load courses into course ComboBox
+        LoadComboBoxData("SELECT Course_id, Course_name FROM courses", course_cbo, "Course_name", "Course_id")
+        ' Load subjects into subject ComboBox
+        LoadComboBoxData("SELECT Subject_id, Subject_name FROM subjects", sub_cbo, "Subject_name", "Subject_id")
+    End Sub
+
+    Private Sub LoadComboBoxData(query As String, comboBox As ComboBox, displayMember As String, valueMember As String)
+        Dim connection As MySqlConnection = Module1.ConnectToDB()
+        Using command As New MySqlCommand(query, connection)
+            Using reader As MySqlDataReader = command.ExecuteReader()
+                Dim dt As New DataTable()
+                dt.Load(reader)
+                comboBox.DataSource = dt
+                comboBox.DisplayMember = displayMember
+                comboBox.ValueMember = valueMember
+            End Using
+        End Using
+    End Sub
+
+    Private Sub course_cbo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles course_cbo.SelectedIndexChanged
+        ' Load students based on the selected course
+        If course_cbo.SelectedValue IsNot Nothing Then
+            Dim selectedCourseId As Integer = Convert.ToInt32(course_cbo.SelectedValue)
+            Dim query As String = "SELECT Student_id, Name FROM students WHERE Course_id = @Course_id"
+            LoadComboBoxData(query, name_cbo, "Name", "Student_id", selectedCourseId)
+        End If
+    End Sub
+
+    Private Sub LoadComboBoxData(query As String, comboBox As ComboBox, displayMember As String, valueMember As String, courseId As Integer)
+        Dim connection As MySqlConnection = Module1.ConnectToDB()
+        Using command As New MySqlCommand(query, connection)
+            command.Parameters.AddWithValue("@Course_id", courseId)
+            Using reader As MySqlDataReader = command.ExecuteReader()
+                Dim dt As New DataTable()
+                dt.Load(reader)
+                comboBox.DataSource = dt
+                comboBox.DisplayMember = displayMember
+                comboBox.ValueMember = valueMember
+            End Using
+        End Using
+    End Sub
+
+    Private Sub add_btn_Click(sender As Object, e As EventArgs) Handles add_btn.Click
+        ' Add selected subject and lecturer to DataGridView
+        If sub_cbo.SelectedValue IsNot Nothing Then
+            Dim selectedSubjectId As Integer = Convert.ToInt32(sub_cbo.SelectedValue)
+            Dim selectedLecturerName As String = GetLecturerName(selectedSubjectId)
+
+            DataGridView1.Rows.Add(selectedSubjectId, sub_cbo.Text, selectedLecturerName)
+        End If
+    End Sub
+
+    Private Function GetLecturerName(subjectId As Integer) As String
+        Dim connection As MySqlConnection = Module1.ConnectToDB()
+        Dim query As String = "SELECT Lecturer_name FROM lecturers WHERE Lecturer_id = (SELECT Lecturer_id FROM subjects WHERE Subject_id = @Subject_id)"
+        Using command As New MySqlCommand(query,connection)
+command.Parameters.AddWithValue("@Subject_id", subjectId)
+            Using reader As MySqlDataReader = command.ExecuteReader()
+                If reader.Read() Then
+                    Return reader("Lecturer_name").ToString()
+                End If
+            End Using
+        End Using
+        Return String.Empty
+    End Function
+
+    Private Sub save_btn_Click(sender As Object, e As EventArgs) Handles save_btn.Click
+        ' Save DataGridView rows to student_subjects table
+        Dim connection As MySqlConnection = Module1.ConnectToDB()
+        Dim transaction As MySqlTransaction = connection.BeginTransaction()
+        
+        Try
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If Not row.IsNewRow Then
+                    Dim studentId As Integer = Convert.ToInt32(name_cbo.SelectedValue)
+                    Dim subjectId As Integer = Convert.ToInt32(row.Cells("SubjectId").Value)
+
+                    Dim query As String = "INSERT INTO student_subjects (Student_id, Subject_id) VALUES (@Student_id, @Subject_id)"
+                    Using command As New MySqlCommand(query, connection, transaction)
+                        command.Parameters.AddWithValue("@Student_id", studentId)
+                        command.Parameters.AddWithValue("@Subject_id", subjectId)
+                        command.ExecuteNonQuery()
+                    End Using
+                End If
+            Next
+
+            transaction.Commit()
+            MessageBox.Show("Data saved successfully.")
+        Catch ex As Exception
+            transaction.Rollback()
+            MessageBox.Show("Error saving data: " & ex.Message)
+        End Try
+    End Sub
+End Class
